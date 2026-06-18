@@ -1,18 +1,43 @@
-# LSTM for Hydrological Runoff & Flood Prediction
+# Agentic Hydrology Platform
 
-A hands-on **learning repository**: train a Long Short-Term Memory (LSTM) network
-to predict river discharge from rainfall and temperature — the modern,
-data-driven approach to rainfall-runoff modelling and flood forecasting.
+> An open, **agentic** platform for hydrological modelling. An **agentic runtime**
+> orchestrates data processing, model selection, training, running, and auditing —
+> **LSTM** predicts large-scale catchment streamflow & floods, **SWMM** models urban
+> drainage & LID — all built on **open data**.
 
-It is built to be read and modified. You start on **synthetic data that runs in
-seconds** (no multi-GB download), get a real working model, then graduate to
-real catchments. If you come from **LLM fine-tuning**, there is a doc that maps
-that knowledge onto this world.
+> **Status — 🚧 early, built in the open.**
+> ✅ **Working today:** the LSTM runoff component — a small, from-scratch PyTorch
+> LSTM reaching **NSE 0.87** on held-out years (details below).
+> 🔭 **On the roadmap:** real-data regional LSTM (Caravan), the agentic runtime,
+> and the SWMM urban layer. Nothing here is over-claimed — see the status column.
 
-## It works — here is the result
+## Architecture
 
-A small LSTM (2 inputs: precipitation + temperature) predicting daily discharge
-on **held-out test years it never saw during training**:
+![Agentic Hydrology Platform architecture](docs/architecture.svg)
+
+Two complementary models and a shared open-data layer, with an agent in charge:
+
+| Layer | Responsibility | Status |
+|---|---|---|
+| **Agentic runtime** | data processing · model selection · training · running · **auditing** (decision + provenance log) | 🔭 planned |
+| **LSTM** | large-scale / mesoscale catchment **streamflow & flood** (regional, Caravan) | ✅ sandbox → 🔭 real data |
+| **SWMM** | **urban drainage & LID** (low-impact development), SWMManywhere-style auto-synthesis | 🔭 planned |
+| **Open data** | Caravan · ERA5-Land · HydroATLAS · OpenStreetMap · DEM | — |
+
+LSTM and SWMM are **complementary**: the LSTM is data-driven, fast, and strong on
+gauged large-scale flow but blind inside cities; SWMM is physics-based and resolves
+urban pipes & LID but needs network data (which SWMManywhere builds from open data).
+The agent routes each question to the right tool — or chains them (LSTM boundary
+inflow → SWMM urban detail).
+
+→ **Full vision, component plan & references: [docs/00_architecture.md](docs/00_architecture.md)**
+
+---
+
+## ✅ What works today — the LSTM runoff component
+
+A small LSTM (2 inputs: precipitation + temperature) predicting daily discharge on
+**held-out test years it never saw during training**:
 
 ![Observed vs LSTM hydrograph on the test period](results/03_hydrograph_test.png)
 
@@ -23,78 +48,58 @@ on **held-out test years it never saw during training**:
 | **r**   | **0.93** | correlation — the *timing* of peaks is right |
 | **PBIAS** | **−6%** | slight underestimate of total volume |
 
-The model captures the big spring **snowmelt flood**, the storm responses, and
-the slow recession tails — none of which a same-day model could do, because they
-depend on *weeks to months* of past weather held in the LSTM's memory.
+The model captures the spring **snowmelt flood**, storm responses, and slow recession
+tails — none of which a same-day model could do, because they depend on *weeks to
+months* of past weather held in the LSTM's memory.
 
-## Quickstart
+### Quickstart
 
 ```bash
-# 1. environment (Python 3.9+)
 python -m venv .venv && source .venv/bin/activate
 pip install -e .                      # installs torch, numpy, pandas, matplotlib
-
-# 2. the three steps
 python scripts/01_generate_data.py    # synthetic 40-year basin -> data/synthetic/basin.csv
 python scripts/02_explore_data.py     # -> results/01_data_overview.png
 python scripts/03_train_lstm.py       # train + evaluate -> results/ (NSE ~0.87)
 ```
 
-Training takes ~1 min on Apple-Silicon (MPS) or a few minutes on CPU. Everything
-is reproducible (`--seed 0`). See every knob with
-`python scripts/03_train_lstm.py --help`.
+~1 min on Apple-Silicon (MPS), a few minutes on CPU; reproducible (`--seed 0`).
+The synthetic basin is a small conceptual model (snow + soil + groundwater), so
+today's discharge genuinely depends on the weather history — the perfect sandbox
+for learning *why* memory matters before moving to real data.
 
-## What you are modelling
+---
 
-The synthetic basin comes from a small conceptual hydrological model (snow +
-soil-moisture + groundwater stores), so today's discharge genuinely depends on
-the history of weather — the perfect sandbox for learning *why* memory matters.
+## Roadmap (component-level)
 
-![Synthetic basin overview](results/01_data_overview.png)
+- **C1 · LSTM runoff** — ✅ synthetic sandbox (NSE 0.87) → real **[Caravan](https://www.nature.com/articles/s41597-023-01975-w)** regional model (the *"never train on a single basin"* approach) → fine-tune to a study region → flood metrics. Detailed path: **[docs/00_roadmap.md](docs/00_roadmap.md)**.
+- **C2 · Agentic runtime** — a declarative *Run* (data → model → train → eval → **audit artifact**); first step = wrap C1 training as an audited, reproducible job.
+- **C3 · SWMM urban** — integrate **[SWMManywhere](https://joss.theoj.org/papers/10.21105/joss.07729)** to synthesize a city drainage model from a bounding box; add LID scenarios.
+- **Integration** — the agent selects & chains C1 and C3.
 
-Notice discharge spikes in late winter **even on dry days**: winter precip was
-stored as snow and is now melting. Teaching an LSTM to capture that stored-state
-behavior is the whole point.
-
-## Repository structure
+## Repository structure (current)
 
 ```
-lstm-hydrology/
-├── src/lstm_hydrology/      # the small, readable library
-│   ├── synthetic.py         #   conceptual rainfall-runoff data generator
-│   ├── dataset.py           #   windowing + leak-free temporal split + scaling
-│   ├── model.py             #   the LSTM (~30 lines)
-│   ├── train.py             #   the training/prediction loop (you own it)
-│   └── metrics.py           #   NSE, KGE, RMSE, PBIAS
-├── scripts/                 # 01 generate · 02 explore · 03 train+evaluate
-├── docs/                    # the curriculum (start here ↓)
-├── data/                    # synthetic data (git-ignored, regenerate any time)
-└── results/                 # committed figures + scores
+agentic-hydrology-platform/
+├── docs/
+│   ├── 00_architecture.md     # the platform vision (start here)
+│   ├── 00_roadmap.md          # LSTM component learning/build path
+│   ├── 01_lstm_intuition.md   # how an LSTM works + the hydrology analogy
+│   ├── 02_from_llm_to_lstm.md # for people coming from OpenAI fine-tuning
+│   ├── 03_hydrology_metrics.md# NSE, KGE, flood scoring
+│   └── architecture.svg
+├── src/lstm_hydrology/        # Component 1 — the LSTM (synthetic, soon Caravan)
+├── scripts/                   # 01 generate · 02 explore · 03 train+evaluate
+├── data/ · results/           # regenerable data (git-ignored) · committed figures
 ```
 
-## Learn it in order
-
-1. **[docs/00_roadmap.md](docs/00_roadmap.md)** — the staged curriculum (Stage 0 → flood forecasting)
-2. **[docs/01_lstm_intuition.md](docs/01_lstm_intuition.md)** — how an LSTM works, and why its cell state behaves like catchment storage
-3. **[docs/02_from_llm_to_lstm.md](docs/02_from_llm_to_lstm.md)** — for people coming from OpenAI fine-tuning
-4. **[docs/03_hydrology_metrics.md](docs/03_hydrology_metrics.md)** — NSE, KGE, and how floods are scored
-
-Then **run the Stage 2 experiments** (`--seq-len 10`, `--features precip`,
-`--target-transform none`, different `--seed`s) and predict each result before
-you run it. That is where the intuition forms.
-
-## Graduating to real data
-
-When the synthetic sandbox feels easy, the same code carries over to real
-catchments — only the data loader changes:
-
-- **[CAMELS](https://ral.ucar.edu/solutions/products/camels)** — large-sample catchment datasets (US, GB, BR, AUS, CL, …), the benchmark for this field.
-- **[neuralhydrology](https://neuralhydrology.readthedocs.io)** — the reference PyTorch library for multi-basin LSTM hydrology (same ideas as here, plus static attributes, the NSE loss, and CAMELS loaders).
+Only what exists is in the tree — components are added as they become real, not before.
 
 ## References
 
-- Kratzert et al. (2018), *Rainfall–runoff modelling using LSTM networks*, HESS — [doi:10.5194/hess-22-6005-2018](https://doi.org/10.5194/hess-22-6005-2018)
-- Kratzert et al. (2019), *Towards learning universal, regional, and local hydrological behaviors via ML*, HESS — [doi:10.5194/hess-23-5089-2019](https://doi.org/10.5194/hess-23-5089-2019)
+- Caravan — [Kratzert et al. 2023, *Sci. Data*](https://www.nature.com/articles/s41597-023-01975-w)
+- Regional training — [*HESS Opinions: Never train an LSTM on a single basin* (2024)](https://hess.copernicus.org/articles/28/4187/2024/)
+- SWMManywhere — [Dobson et al. 2025, *Env. Modelling & Software*](https://www.sciencedirect.com/science/article/pii/S1364815225000428)
+- neuralhydrology — [docs](https://neuralhydrology.readthedocs.io)
 
 ## License
 

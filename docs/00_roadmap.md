@@ -1,4 +1,9 @@
-# Learning roadmap
+# LSTM component — learning & build roadmap
+
+> Part of the **[Agentic Hydrology Platform](00_architecture.md)**. This is the
+> roadmap for **Component 1 (LSTM runoff)**; for the overall platform vision
+> (agentic runtime · LSTM · SWMM, on open data) see
+> **[00_architecture.md](00_architecture.md)**.
 
 A staged path from "what is an LSTM" to "regional flood/runoff models on real
 data." Each stage has a **goal**, **do**, **success check**, and **exercises**.
