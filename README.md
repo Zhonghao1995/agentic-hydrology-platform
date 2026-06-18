@@ -6,7 +6,7 @@
 > **river basins, cities, and countryside** — uniting data-driven and physically based
 > models behind a single conversational interface.
 
-![architecture](docs/architecture.svg)
+![The Agentic Hydrology Platform](docs/overview.png)
 
 The runtime is **[aiswmm](https://github.com/Zhonghao1995/agentic-swmm-workflow)**: it
 reads intent from natural language, selects and runs the right models over open data,
