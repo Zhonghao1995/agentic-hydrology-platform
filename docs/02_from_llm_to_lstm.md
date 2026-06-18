@@ -52,5 +52,6 @@ research frontier:
   a catchment with *no* streamflow record — the headline result of the LSTM
   hydrology literature, and the analogue of zero-shot transfer.
 
-You reach that frontier in [Stage 4 of the roadmap](00_roadmap.md). First, build
-the from-scratch muscle in Stages 1–2 — it is the part the API never showed you.
+That frontier — pretrain on many basins, then adapt to one — is where this field
+is headed. First, build the from-scratch muscle here; it is the part the API
+never showed you.

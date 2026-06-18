@@ -1,4 +1,4 @@
-"""Stage 1, step 1: generate the synthetic rainfall-runoff dataset.
+"""Step 1: generate the synthetic rainfall-runoff dataset.
 
     python scripts/01_generate_data.py            # 20 years -> data/synthetic/basin.csv
 """

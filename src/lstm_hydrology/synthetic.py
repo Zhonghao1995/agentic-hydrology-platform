@@ -11,7 +11,7 @@ day depends on *weeks to months* of past weather:
 
 That multi-timescale memory is exactly what an LSTM's cell state is good at
 capturing, which makes this an honest sandbox for rainfall-runoff modelling
-before you move on to real data (see docs/00_roadmap.md).
+before you move on to real data.
 """
 from __future__ import annotations
 

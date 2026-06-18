@@ -1,4 +1,4 @@
-"""Stage 1, step 2: visualise the data so you know what you are modelling.
+"""Step 2: visualise the data so you know what you are modelling.
 
 Always look at the hydrograph before training. You should be able to *see* the
 seasonal cycle, storm responses, and slow recessions the LSTM will learn.

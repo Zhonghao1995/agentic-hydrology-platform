@@ -55,7 +55,7 @@ with the small remaining gap coming mostly from a slight low bias (β < 1).
 - **NSE on log-flow (log-NSE)** — recompute NSE on `log(flow)` to judge **low-flow
   and drought** behavior, which plain NSE ignores.
 - **FHV (high-flow volume bias)** — error over just the top ~2% of flows; a
-  **flood-relevant** score. Add it when you reach Stage 5.
+  **flood-relevant** score, worth adding once you focus on floods.
 - **Peak timing error** — is the flood peak on the right *day*? Critical for warnings.
 
 ## The NSE *loss* (for training)
@@ -64,5 +64,5 @@ You can train *directly* for NSE instead of plain MSE. Kratzert's basin-averaged
 NSE loss weights each basin's squared error by `1/σ_obs²`, so that high-variance
 and low-variance basins contribute comparably when training one model on many
 basins. For a single basin it reduces to scaled MSE, which is why this repo
-trains on MSE (of transformed flow) — but it is the natural upgrade at
-[Stage 4](00_roadmap.md).
+trains on MSE (of transformed flow) — but it is the natural upgrade once you
+train one model across many basins.

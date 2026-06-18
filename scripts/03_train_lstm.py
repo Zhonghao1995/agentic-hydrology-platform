@@ -1,4 +1,4 @@
-"""Stage 1, step 3: train an LSTM to predict discharge, then evaluate it.
+"""Step 3: train an LSTM to predict discharge, then evaluate it.
 
     python scripts/03_train_lstm.py                  # sensible defaults
     python scripts/03_train_lstm.py --features precip # weaker: rain only, no temp
