@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+
+# Local tooling / OS
+.claude/
+.DS_Store
+
+# Generated data (regenerate with scripts/01_generate_data.py).
+# Results figures ARE committed so the repo tells its story on GitHub.
+data/synthetic/*.csv

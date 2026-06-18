@@ -1,0 +1,5 @@
+# Pinned-loosely deps for the learning sandbox. Prefer: pip install -e .
+torch>=2.3
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.7
