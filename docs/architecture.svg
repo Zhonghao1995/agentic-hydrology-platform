@@ -1,66 +1,45 @@
-<svg viewBox="0 0 960 660" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L9,5 L0,10 z" fill="#000000"/>
     </marker>
   </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#ffffff"/>
 
-  <rect x="0" y="0" width="960" height="660" rx="16" fill="#f7f9fc"/>
+  <!-- natural-language input -->
+  <rect x="320" y="26" width="260" height="48" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+  <text x="450" y="49" text-anchor="middle" font-size="15" fill="#000000">Natural-language query</text>
+  <text x="450" y="66" text-anchor="middle" font-size="11.5" font-style="italic" fill="#000000">“flood risk here?”   “size this LID?”</text>
+  <line x1="450" y1="74" x2="450" y2="104" stroke="#000000" stroke-width="1.5" marker-end="url(#ah)"/>
 
-  <text x="480" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#0f172a">Agentic Hydrology Platform</text>
-  <text x="480" y="68" text-anchor="middle" font-size="14" fill="#475569">An agent orchestrates data, models, training, runs &amp; audit — on open data</text>
+  <!-- aiswmm runtime -->
+  <rect x="70" y="106" width="760" height="98" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <text x="100" y="148" font-size="25" font-weight="700" fill="#000000">aiswmm</text>
+  <text x="100" y="174" font-size="13.5" fill="#000000">agentic runtime — interprets intent, selects and runs models, audits every step</text>
+  <text x="815" y="126" text-anchor="end" font-size="11" font-style="italic" fill="#000000">separate repository</text>
 
-  <!-- User -->
-  <rect x="350" y="94" width="260" height="46" rx="23" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="480" y="122" text-anchor="middle" font-size="14.5" fill="#334155" font-weight="600">User question / scenario</text>
-  <line x1="480" y1="140" x2="480" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="270" y1="204" x2="270" y2="252" stroke="#000000" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="630" y1="204" x2="630" y2="252" stroke="#000000" stroke-width="1.5" marker-end="url(#ah)"/>
 
-  <!-- Agentic runtime -->
-  <rect x="70" y="172" width="820" height="120" rx="14" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
-  <text x="92" y="200" font-size="17" font-weight="700" fill="#3730a3">Agentic Runtime</text>
-  <text x="248" y="200" font-size="13" fill="#4f46e5">orchestration &amp; audit trail</text>
-  <g font-size="13" fill="#312e81" text-anchor="middle">
-    <rect x="92"  y="220" width="140" height="50" rx="10" fill="#ffffff" stroke="#c7d2fe"/>
-    <text x="162" y="242">Data</text><text x="162" y="259">processing</text>
-    <rect x="246" y="220" width="140" height="50" rx="10" fill="#ffffff" stroke="#c7d2fe"/>
-    <text x="316" y="242">Model</text><text x="316" y="259">selection</text>
-    <rect x="400" y="220" width="140" height="50" rx="10" fill="#ffffff" stroke="#c7d2fe"/>
-    <text x="470" y="250">Training</text>
-    <rect x="554" y="220" width="140" height="50" rx="10" fill="#ffffff" stroke="#c7d2fe"/>
-    <text x="624" y="250">Running</text>
-    <rect x="708" y="220" width="140" height="50" rx="10" fill="#ffffff" stroke="#c7d2fe"/>
-    <text x="778" y="250">Auditing</text>
-  </g>
+  <!-- LSTM engine -->
+  <rect x="110" y="254" width="300" height="116" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <text x="130" y="290" font-size="20" font-weight="700" fill="#000000">LSTM</text>
+  <text x="130" y="316" font-size="13" fill="#000000">Large-scale catchment</text>
+  <text x="130" y="334" font-size="13" fill="#000000">streamflow &amp; flood forecasting</text>
+  <text x="130" y="357" font-size="11.5" font-style="italic" fill="#000000">data-driven · regional</text>
 
-  <line x1="300" y1="292" x2="300" y2="340" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="660" y1="292" x2="660" y2="340" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- SWMM engine -->
+  <rect x="490" y="254" width="300" height="116" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <text x="510" y="290" font-size="20" font-weight="700" fill="#000000">SWMM</text>
+  <text x="510" y="316" font-size="13" fill="#000000">Urban &amp; rural drainage,</text>
+  <text x="510" y="334" font-size="13" fill="#000000">runoff &amp; LID</text>
+  <text x="510" y="357" font-size="11.5" font-style="italic" fill="#000000">agentic SWMM workflow</text>
 
-  <!-- LSTM -->
-  <rect x="100" y="342" width="360" height="122" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
-  <text x="124" y="372" font-size="17" font-weight="700" fill="#065f46">LSTM</text>
-  <rect x="360" y="354" width="86" height="22" rx="11" fill="#10b981"/>
-  <text x="403" y="369" text-anchor="middle" font-size="11.5" fill="#ffffff" font-weight="700">working</text>
-  <text x="124" y="399" font-size="13.5" fill="#047857">Large-scale catchment</text>
-  <text x="124" y="417" font-size="13.5" fill="#047857">streamflow &amp; flood forecasting</text>
-  <text x="124" y="441" font-size="12" fill="#059669">regional · data-driven · Caravan</text>
+  <line x1="260" y1="370" x2="260" y2="418" stroke="#000000" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="640" y1="370" x2="640" y2="418" stroke="#000000" stroke-width="1.5" marker-end="url(#ah)"/>
 
-  <!-- SWMM -->
-  <rect x="500" y="342" width="360" height="122" rx="14" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
-  <text x="524" y="372" font-size="17" font-weight="700" fill="#9a3412">SWMM</text>
-  <rect x="760" y="354" width="86" height="22" rx="11" fill="#f59e0b"/>
-  <text x="803" y="369" text-anchor="middle" font-size="11.5" fill="#ffffff" font-weight="700">planned</text>
-  <text x="524" y="399" font-size="13.5" fill="#b45309">Urban drainage &amp; LID</text>
-  <text x="524" y="417" font-size="13.5" fill="#b45309">(low-impact development)</text>
-  <text x="524" y="441" font-size="12" fill="#d97706">physics-based · SWMManywhere</text>
-
-  <line x1="280" y1="464" x2="280" y2="512" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="680" y1="464" x2="680" y2="512" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-  <!-- Open data -->
-  <rect x="70" y="514" width="820" height="112" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
-  <text x="92" y="542" font-size="17" font-weight="700" fill="#334155">Open Data</text>
-  <text x="124" y="572" font-size="13" font-weight="600" fill="#065f46">Natural catchments</text>
-  <text x="124" y="594" font-size="13" fill="#334155">Caravan · ERA5-Land · HydroATLAS · streamflow gauges</text>
-  <text x="560" y="572" font-size="13" font-weight="600" fill="#9a3412">Urban</text>
-  <text x="560" y="594" font-size="13" fill="#334155">OpenStreetMap · DEM · buildings</text>
+  <!-- open data -->
+  <rect x="70" y="420" width="760" height="74" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <text x="100" y="452" font-size="16" font-weight="700" fill="#000000">Open data</text>
+  <text x="100" y="475" font-size="12.5" fill="#000000">global meteorology · catchment attributes · streamflow · terrain · drainage networks</text>
 </svg>
