@@ -70,9 +70,16 @@ reason.) This is the natural next script to write yourself.
 
 ---
 
-## Stage 3 — Real single-basin data (CAMELS)
+## Stage 3 — Real data via neuralhydrology (CAMELS → Caravan)
 
-**Goal:** repeat Stage 1 on one real catchment.
+> ✅ **Milestone reached:** the full real-data pipeline (config → train → evaluate
+> → per-basin NSE) runs via [neuralhydrology](https://neuralhydrology.readthedocs.io)
+> on a bundled **4-basin CAMELS-US** sample — see
+> [`experiments/real_smoketest/`](../experiments/real_smoketest/) (median test
+> NSE ≈ 0.41 — a *plumbing* check, not a skill result). Next: scale to many basins
+> via **cloud Caravan** (same config, swap the data source).
+
+**Goal:** repeat Stage 1 on real catchments.
 
 **Do:** download [CAMELS-US](https://ral.ucar.edu/solutions/products/camels),
 pick one basin, map its columns (precip, temperature, PET, discharge) to the

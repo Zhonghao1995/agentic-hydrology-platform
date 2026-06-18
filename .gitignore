@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 *.egg-info/
-.venv/
+.venv*/
 venv/
 
 # Local tooling / OS
@@ -12,3 +12,8 @@ venv/
 # Generated data (regenerate with scripts/01_generate_data.py).
 # Results figures ARE committed so the repo tells its story on GitHub.
 data/synthetic/*.csv
+
+# Real-data sample (fetch with experiments/real_smoketest/prepare_data.sh)
+# and neuralhydrology run outputs (weights, tensorboard).
+data/camels_us_sample/
+experiments/*/runs/

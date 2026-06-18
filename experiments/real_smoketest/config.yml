@@ -1,0 +1,89 @@
+# Component 1 — real-data pipeline smoke test (neuralhydrology + CAMELS-US sample).
+#
+# Goal: prove the full regional-LSTM workflow on REAL data (config -> train ->
+# evaluate -> per-basin NSE) with ~no download. This is a tiny 4-basin / 3-year
+# sample, so it validates the PLUMBING, not skill — real performance needs the
+# longer, many-basin records we get from cloud Caravan next.
+#
+# Run from the repo root after `bash experiments/real_smoketest/prepare_data.sh`:
+#   .venv/bin/nh-run train --config-file experiments/real_smoketest/config.yml
+
+experiment_name: camels_us_4basin_smoketest
+run_dir: experiments/real_smoketest/runs
+
+train_basin_file: data/camels_us_sample/4_basins.txt
+validation_basin_file: data/camels_us_sample/4_basins.txt
+test_basin_file: data/camels_us_sample/4_basins.txt
+
+# Streamflow labels in this sample only span 2000–2002.
+train_start_date: "01/01/2000"
+train_end_date: "31/12/2001"
+validation_start_date: "01/01/2002"
+validation_end_date: "30/06/2002"
+test_start_date: "01/07/2002"
+test_end_date: "31/12/2002"
+
+seed: 111
+device: cpu
+
+# --- Validation ---
+validate_every: 5
+validate_n_random_basins: 4
+metrics:
+  - NSE
+  - KGE
+  - Alpha-NSE
+  - Beta-NSE
+
+# --- Model ---
+model: cudalstm          # standard nn.LSTM under the hood; runs fine on CPU/MPS
+head: regression
+output_activation: linear
+hidden_size: 64
+initial_forget_bias: 3
+output_dropout: 0.4
+
+# --- Training ---
+optimizer: Adam
+loss: NSE                # basin-averaged NSE loss (neuralhydrology's signature)
+learning_rate:
+  0: 1e-3
+  10: 5e-4
+batch_size: 256
+epochs: 20
+clip_gradient_norm: 1
+predict_last_n: 1
+seq_length: 90
+num_workers: 0
+log_interval: 5
+log_tensorboard: False
+log_n_figures: 4
+save_weights_every: 20
+save_validation_results: True
+
+# --- Data ---
+dataset: camels_us
+data_dir: data/camels_us_sample
+forcings:
+  - maurer
+  - daymet
+  - nldas
+dynamic_inputs:
+  - PRCP(mm/day)_nldas
+  - PRCP(mm/day)_maurer
+  - prcp(mm/day)_daymet
+  - srad(W/m2)_daymet
+  - tmax(C)_daymet
+  - tmin(C)_daymet
+  - vp(Pa)_daymet
+target_variables:
+  - QObs(mm/d)
+clip_targets_to_zero:
+  - QObs(mm/d)
+static_attributes:
+  - elev_mean
+  - slope_mean
+  - area_gages2
+  - frac_snow
+  - aridity
+  - p_mean

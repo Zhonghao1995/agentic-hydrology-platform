@@ -71,7 +71,7 @@ for learning *why* memory matters before moving to real data.
 
 ## Roadmap (component-level)
 
-- **C1 · LSTM runoff** — ✅ synthetic sandbox (NSE 0.87) → real **[Caravan](https://www.nature.com/articles/s41597-023-01975-w)** regional model (the *"never train on a single basin"* approach) → fine-tune to a study region → flood metrics. Detailed path: **[docs/00_roadmap.md](docs/00_roadmap.md)**.
+- **C1 · LSTM runoff** — ✅ synthetic sandbox (NSE 0.87) → ✅ real-data pipeline validated via neuralhydrology ([experiments/real_smoketest](experiments/real_smoketest/), 4 CAMELS-US basins) → 🔭 scale up on **[Caravan](https://www.nature.com/articles/s41597-023-01975-w)** (the *"never train on a single basin"* approach) → fine-tune to a study region → flood metrics. Detailed path: **[docs/00_roadmap.md](docs/00_roadmap.md)**.
 - **C2 · Agentic runtime** — a declarative *Run* (data → model → train → eval → **audit artifact**); first step = wrap C1 training as an audited, reproducible job.
 - **C3 · SWMM urban** — integrate **[SWMManywhere](https://joss.theoj.org/papers/10.21105/joss.07729)** to synthesize a city drainage model from a bounding box; add LID scenarios.
 - **Integration** — the agent selects & chains C1 and C3.
