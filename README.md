@@ -14,37 +14,44 @@ physically based approaches in a single workflow.
 
 ## How it fits together
 
-The platform is one **agentic runtime** conducting a set of specialised modelling engines
-over a shared, open-data foundation. You speak to the runtime; it speaks to the models.
+The platform is one **agentic runtime** conducting a set of specialised engines, designed
+to interoperate, over a shared open-data foundation. You speak to the runtime; it speaks to
+the models — and keeps every step as an inspectable, reproducible artifact.
 
 ### aiswmm — the agentic runtime
-The conductor. It interprets a natural-language request, decides which engines and data are
-needed, runs them, and records every decision as an audit trail — so going from a question
-("what is the flood risk for this town?") to a defensible answer takes no manual tool-wiring.
+The conductor. You describe a modelling goal in plain language; aiswmm coordinates the
+workflow while execution stays deterministic, inspectable, and artifact-based — with QA
+verification, provenance tracking, and modelling memory, so results are reproducible and
+auditable. It is exposed as MCP servers and Skills, so it also runs under Codex, Claude,
+Hermes, or OpenClaw.
 → [agentic-swmm-workflow](https://github.com/Zhonghao1995/agentic-swmm-workflow)
 
 ### LSTM — catchment streamflow & flood forecasting
 A data-driven engine that learns rainfall–runoff behaviour from records and predicts river
 discharge and floods at catchment to regional scale. Best where gauged or large-sample data
-exist and you need fast, accurate streamflow and flood forecasts.
+exist and you need fast streamflow and flood forecasts.
 → *this repository (details below)*
 
-### agentic SWMM — urban & rural drainage
-Physically based stormwater modelling of pipes, channels, sub-catchments, and
-Low-Impact-Development (LID) controls, across both city and countryside. Use it for drainage
-design, runoff control, and green-infrastructure scenarios.
+### agentic SWMM — reproducible stormwater modelling
+A verification-first, auditable framework for EPA SWMM: GIS preprocessing, model generation,
+deterministic SWMM runs, QA checks, calibration support, and provenance — natural-language
+driven but artifact-based, with the modeller in control. For urban & rural drainage, runoff,
+and Low-Impact-Development (LID) design.
 → [agentic-swmm-workflow](https://github.com/Zhonghao1995/agentic-swmm-workflow)
 
-### agentic MIKE+ — advanced urban & flood modelling
-Integrated urban-water and flood modelling on MIKE+, for richer hydraulic detail — coupled
-1D/2D flooding and complex networks — than a lumped model can provide. Use it when a study
-needs detailed, coupled flood and drainage simulation.
+### agentic MIKE+ — headless MIKE+ automation
+A headless, natural-language automation layer for DHI **MIKE+**: an MCP server + Skills that
+let an agent inspect, edit, run, read, and plot a MIKE+ model end to end — no GUI. For
+detailed urban-water and flood modelling and batch/scenario automation; reading results and
+plotting need no MIKE+ license.
 → [Agentic-MIKE-Plus](https://github.com/Zhonghao1995/Agentic-MIKE-Plus)
 
-### CIS — data preprocessing
-Turns raw open datasets — meteorology, terrain, catchment attributes, network data — into
-clean, model-ready inputs for every engine above. It is the step that makes "set up a new
-study area anywhere" actually work.
+### CIS — data preprocessing & model building
+Draw an area (today, anywhere in Canada) and it pulls the open data for that spot — rainfall,
+terrain, land cover, soil, and the city's storm network — and assembles a complete,
+ready-to-run model. It uses real municipal networks where published (Victoria, Ottawa) and
+synthesises one elsewhere. This is the upstream data-preprocessing stage that feeds the
+engines above.
 → [SWMMCanada](https://github.com/Zhonghao1995/SWMMCanada)
 
 ## This repository — the LSTM engine
