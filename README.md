@@ -33,8 +33,9 @@ exist and you need fast streamflow and flood forecasts.
 → *this repository (details below)*
 
 ### agentic SWMM — reproducible stormwater modelling
-A verification-first, auditable framework for EPA SWMM: GIS preprocessing, model generation,
-deterministic SWMM runs, QA checks, calibration support, and provenance — natural-language
+The SWMM framework the **aiswmm** runtime drives (same repository as above): a
+verification-first, auditable workflow for EPA SWMM — GIS preprocessing, model generation,
+deterministic SWMM runs, QA checks, calibration support, and provenance, natural-language
 driven but artifact-based, with the modeller in control. For urban & rural drainage, runoff,
 and Low-Impact-Development (LID) design.
 → [agentic-swmm-workflow](https://github.com/Zhonghao1995/agentic-swmm-workflow)
