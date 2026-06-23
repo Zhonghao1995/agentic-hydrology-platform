@@ -15,7 +15,7 @@ every step. The platform's modules:
 - **[aiswmm](https://github.com/Zhonghao1995/agentic-swmm-workflow)** — agentic runtime · natural-language orchestration & audit
 - **LSTM** — large-scale catchment streamflow & flood · *this repository*
 - **[agentic SWMM](https://github.com/Zhonghao1995/agentic-swmm-workflow)** — urban & rural drainage, runoff & LID
-- **agentic MIKE+** — urban & flood modelling with MIKE+ *(link coming)*
+- **[agentic MIKE+](https://github.com/Zhonghao1995/Agentic-MIKE-Plus)** — urban & flood modelling with MIKE+
 - **[CIS](https://github.com/Zhonghao1995/SWMMCanada)** — data preprocessing
 
 ## This repository — the LSTM engine
