@@ -8,12 +8,15 @@
 
 ![The Agentic Hydrology Platform](docs/overview.png)
 
-The runtime is **[aiswmm](https://github.com/Zhonghao1995/agentic-swmm-workflow)**: it
-reads intent from natural language, selects and runs the right models over open data,
-and audits every step. It drives two complementary engines:
+A natural-language **[aiswmm](https://github.com/Zhonghao1995/agentic-swmm-workflow)**
+runtime reads intent in plain language, runs the right engine over open data, and audits
+every step. The platform's modules:
 
-- **LSTM** — large-scale catchment streamflow & flood forecasting · *this repository*
-- **SWMM** — urban & rural drainage, runoff & LID, via the [agentic SWMM workflow](https://github.com/Zhonghao1995/agentic-swmm-workflow)
+- **[aiswmm](https://github.com/Zhonghao1995/agentic-swmm-workflow)** — agentic runtime · natural-language orchestration & audit
+- **LSTM** — large-scale catchment streamflow & flood · *this repository*
+- **[agentic SWMM](https://github.com/Zhonghao1995/agentic-swmm-workflow)** — urban & rural drainage, runoff & LID
+- **agentic MIKE+** — urban & flood modelling with MIKE+ *(link coming)*
+- **[CIS](https://github.com/Zhonghao1995/SWMMCanada)** — data preprocessing
 
 ## This repository — the LSTM engine
 
